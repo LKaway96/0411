@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sketch</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      /* 選單容器 */
+      .menu {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        z-index: 3; /* 選單放在最上層 */
+      }
+
+      /* 選單項目 */
+      .menu li {
+        margin: 0 30px; /* 項目之間的距離為 30px */
+        position: relative; /* 為了子選單定位 */
+      }
+
+      /* 選單連結樣式 */
+      .menu a {
+        text-decoration: none;
+        color: #ffffff;
+        background-color: #fcbf49;
+        padding: 8px 15px;
+        height: 50px; /* 選項的高度為 50px */
+        line-height: 50px; /* 讓文字垂直置中 */
+        font-size: 30px; /* 文字大小為 30px */
+        font-family: 'Microsoft JhengHei', sans-serif; /* 微軟正黑體 */
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      /* 滑鼠懸停效果 */
+      .menu a:hover {
+        background-color: #f77f00;
+      }
+
+      /* 子選單 */
+      .submenu {
+        max-height: 0; /* 初始高度為 0 */
+        overflow: hidden; /* 隱藏內容 */
+        position: absolute;
+        top: 60px; /* 子選單位置 */
+        left: 0;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fcbf49;
+        border-radius: 5px;
+        z-index: 3;
+        transition: max-height 0.3s ease; /* 添加滑動動畫 */
+      }
+
+      .submenu li {
+        margin: 0;
+      }
+
+      .submenu a {
+        display: block;
+        padding: 8px 15px;
+        font-size: 20px;
+        height: auto;
+        line-height: normal;
+      }
+
+      /* 顯示子選單 */
+      .menu li.active .submenu {
+        max-height: 500px; /* 設定足夠大的高度以顯示所有子選單項目 */
+      }
+
+      /* iframe 樣式 */
+      #content-frame {
+        display: none; /* 預設隱藏 */
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: 80%;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.2); /* 背景透明度 0.2 */
+        z-index: 2; /* iframe 放在第二層 */
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 選單 -->
+    <ul class="menu">
+      <li><a href="#" onclick="hideIframe()">首頁</a></li>
+      <li><a href="#about" onclick="hideIframe()">自我介紹</a></li>
+      <li onclick="toggleSubmenu(this)">
+        <a href="#portfolio">作品集</a>
+        <ul class="submenu">
+          <li><a href="#" onclick="showIframe('https://hackmd.io/@L-Kaway/rJsUVtX6Jl')">第一周</a></li>
+          <li><a href="#" onclick="showIframe('https://hackmd.io/@L-Kaway/SyZenyuoJx')">第二周</a></li>
+          <li><a href="#" onclick="showIframe('https://hackmd.io/@L-Kaway/rJsUVtX6Jl')">第三周</a></li>
+          <li><a href="#" onclick="showIframe('https://github.com/LKaway96/250328.git')">第四周</a></li>
+        </ul>
+      </li>
+      <li><a href="#quiz" onclick="hideIframe()">測驗卷</a></li>
+      <li><a href="#tutorials"onclick="hideIframe()">教學影片</a></li>
+    </ul>
+
+    <!-- iframe -->
+    <iframe id="content-frame"></iframe>
+
+    <!-- 動畫背景 -->
+    <script src="sketch.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
